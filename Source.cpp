@@ -1,15 +1,16 @@
 #include "Header.h"
 
 int main() {
-	string input;
-	string output;
+	bool programExit = false;
+	do {
+		string input;
+		string output;
 
-	cin >> input;
+		getline(cin, input);
+		output = giveOutPut(input);
 
-	output = hashFunction(input);
-
-	
-	cout << output;
+		cout << output << endl;
+	} while (programExit == false);
 
 
 	return EXIT_SUCCESS;

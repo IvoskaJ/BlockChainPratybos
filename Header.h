@@ -8,36 +8,32 @@
 
 using namespace std;
 
-
-int extendInput(int& inputVal) {
-	inputVal = rand() * (sqrt(pow(inputVal, 8)));
-	return inputVal;
-}
-
-string convertInputToInteger(string &input) {
-	int inputVal=0;
-	for (int i = 0; i < input.length(); i++) {
-		inputVal = inputVal + input.at(i);
+unsigned int hashFunction(string input) {
+	const unsigned int init = 17;
+	const unsigned int magic = 7753;
+	 unsigned int hash;
+	for (int i = 0; i < input.length(); i++){
+		hash = hash ^ (input[i]);
+		hash = hash * magic;
+		hash = hash ^ (input.length());
 	}
-
-	extendInput(inputVal);
-
-	input = to_string(inputVal);
-
-	return input;
+	return hash;
 }
 
-string hashFunction(string input) {
+string toHex(unsigned int input) {
+	string hexHash;
+	stringstream hexstream;
+	hexstream << hex << input;
+	hexHash = hexstream.str();
+	return hexHash;
+}
+
+
+string giveOutPut(string input) {
 	string output;
 	stringstream thingy;
-	convertInputToInteger(input);
+	output = toHex(hashFunction(toHex(hashFunction(input))));
 
 
-
-	for (const auto& item : input) {
-		thingy << hex << int(item);
-	}
-	output = thingy.str();
-	
 	return output;
 }
