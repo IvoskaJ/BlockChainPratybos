@@ -5,3 +5,6 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    
    
    2021/09/19 antras commitas, patobulinta hash funkcija
+
+   
+   2021/09/22 trecias commitas, dar pakeista hash funkcija, pridetas pasirinkimas naudoti duomenis paimtus is failo
