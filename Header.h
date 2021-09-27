@@ -11,7 +11,6 @@
 using namespace std;
 
 int convertStringToUnsignedInt(string input) {
-    cout << input << endl;
 	const int init = 1773;
 	const int magic = 7753;
     int stringConvertedToInt=0;
@@ -24,7 +23,6 @@ int convertStringToUnsignedInt(string input) {
                 }
                 stringConvertedToInt=stringConvertedToInt*init;
             }
-    cout << stringConvertedToInt << endl;
 	return stringConvertedToInt;
 }
 
