@@ -14,6 +14,8 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    2021/09/29 sestas commitas, ideta galimybe patikrinti gaunamu hashu panasumus bitu ir hex'o lygmenyje.
    
    eksperimentiniai tyrimai-analize:
+   
+   
    1.Susikurkite testinių įvedimo failų pavyzdžių, tokių kad:
    Bent du failai būtų sudaryti tik iš vieno, tačiau skirtingo, simbolio.
    Bent du failai būtų sudaryti iš daug (> 1000) atsitiktinai sugeneruotų simbolių.
@@ -21,3 +23,8 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    Tuščio failo.
    
    ![image](https://user-images.githubusercontent.com/78845735/135328470-0ca3d447-a400-455c-8b6a-26def41c1084.png)
+
+
+   2.  Naudojant šiuos failus, kaip Jūsų programos input'us, įsitikinkite, kad Jūsų hash funkcija atitinka 1-3-ą reikalavimus, t.y., nepriklausomai nuo Input'o, Output'ai visada yra vienodo dydžio, o to paties failo hash'as yra tas pats.
+   
+   ![image](https://user-images.githubusercontent.com/78845735/135328815-d3b8c821-7ab5-49e2-9db9-2d34faa7becd.png)
