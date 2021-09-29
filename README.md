@@ -13,6 +13,8 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    
    2021/09/29 sestas commitas, ideta galimybe patikrinti gaunamu hashu panasumus bitu ir hex'o lygmenyje.
    
+   2021/09/29 septintas commitas, sutvarkyta collision analisys funkcija, ir palyginimo hex'o ir bitu lygmenyje funkcija.
+   
    eksperimentiniai tyrimai-analize:
    
    
