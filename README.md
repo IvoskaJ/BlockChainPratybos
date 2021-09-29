@@ -47,5 +47,11 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    taigi is tyrimo akivaizdu, kad parasyta hash funkcija yra labai leta, palyginus su md5 ir sha256
 
 
+   4.  Susigeneruokite bent 100 000 atsitiktinių simbolių eilučių ( string 'ų) porų, pvz. (asdfg, hijkl), apsiribojant iki 1000 simbolių ilgiu. Toje pačioje poroje esančių string'ų ilgiai turi sutapti, tačiau skirtingos poros gali būti skirtingo ilgio. Rekomenduojame susigeneruoti taip: 25000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25 000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių.
+
+
+5.  Tuomet naudodami šias sugeneruotas poras, patikrinkite, ar tikrai visais atvejais gautieji porų hash'ai nesutampa. O jeigu sutampta, tai kaip dažnai tai nutinka ir galbūt pabandykite ištaisyti programos realizaciją, kad to išvengti. Tokiu būdu (jeigu tikrai visuomet hash'ai nesutampa) bent dalinai įsitikinsite, kad Jūsų hash funkcija atitinka 6-ą reikalavimą (atsparumą kolizijai)
    
    
+   ![image](https://user-images.githubusercontent.com/78845735/135331546-070e8b07-9450-479b-b0b1-f066634ca387.png)
+
