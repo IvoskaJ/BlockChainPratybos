@@ -69,6 +69,13 @@ bitset<256> scrambleBits(bitset<256> &bs, int input){
     return bs;
 }
 
+string returnedHexedBits(int input){
+    bitset<256> bs(input^2);
+    scrambleBits(bs, input);
+    string stringedBits = bs.to_string();
+    return stringedBits;
+}
+
 string toHash(int input) {
     bitset<256> bs(input^2);
     scrambleBits(bs, input);

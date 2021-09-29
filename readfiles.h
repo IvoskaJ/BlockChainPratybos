@@ -191,3 +191,81 @@ void compareToShaAndMd5(){
     duration = duration_cast<microseconds>(stop - start) * 1.0 / 1000000;
     cout << "time taken to hash 1000symbols.txt with md5 " << duration.count() << endl;
 }
+
+void findPercentileOfMatchingHex(){
+        ofstream fr("fileForCheckingHashes.txt");
+        for (int j=0; j<100000; j++){
+            string s = gen_random(1000);
+            s.at(0)='a';
+            fr << s << endl;
+            s.at(0)='b';
+            fr << s << endl;
+        }
+        fr.close();
+        vector<string> hashesThatStartWithA;
+        vector<string> hashesThatStartWithB;
+        string temp;
+        ifstream fd("fileForCheckingHashes.txt");
+        for(int i=0; i<100000; i++){
+            fd >> temp;
+            hashesThatStartWithA.push_back(temp);
+            fd >> temp;
+            hashesThatStartWithB.push_back(temp);
+        }
+        fd.close();
+        for(int i = 0; i<100000; i++){
+            temp = giveOutPut(hashesThatStartWithA[i]);
+            hashesThatStartWithA.at(i) = temp;
+            temp = giveOutPut(hashesThatStartWithB[i]);
+            hashesThatStartWithB.at(i) = temp;
+        }
+        int amountOfMatches=0;
+        string temp2;
+        for (int i = 0; i<100000; i++){
+            temp = hashesThatStartWithA[i];
+            temp2 = hashesThatStartWithB[i];
+            for(int j =0; j<64; j++){
+                if(temp.at(j)==temp2.at(j))
+                    amountOfMatches++;
+            }
+        }
+        hashesThatStartWithA.clear();
+        hashesThatStartWithB.clear();
+
+        double percentageOfMatchingHex = (amountOfMatches * 100 / 6400000);
+        cout << "percentile of matching hex: " << percentageOfMatchingHex << "% " << endl;
+}
+
+void findPercentileOfMatchingBinary(){
+        ifstream fd("fileForCheckingHashes.txt");
+        string temp;
+        vector<string> hashesThatStartWithA;
+        vector<string> hashesThatStartWithB;
+        for (int i=0; i<100000; i++){
+            fd >> temp;
+            hashesThatStartWithA.push_back(temp);
+            fd >> temp;
+            hashesThatStartWithB.push_back(temp);
+        }
+        for(int i =0; i<100000; i++){
+            temp = returnedHexedBits(convertStringToUnsignedInt(hashesThatStartWithA[i]));
+            hashesThatStartWithA.at(i) = temp;
+            temp = returnedHexedBits(convertStringToUnsignedInt(hashesThatStartWithB[i]));
+            hashesThatStartWithB.at(i) = temp;
+        }
+        int amountOfMatches = 0;
+        string temp2;
+        for (int i = 0; i<100000; i++){
+            temp = hashesThatStartWithA[i];
+            temp2 = hashesThatStartWithB[i];
+            for(int j =0; j<256; j++){
+                if(temp.at(j)==temp2.at(j))
+                    amountOfMatches++;
+            }
+        }
+        hashesThatStartWithA.clear();
+        hashesThatStartWithB.clear();
+
+        double percentageOfMatchingBinary = (amountOfMatches * 100 / 25600000);
+        cout << "percentile of matching binary: " << percentageOfMatchingBinary << "% " << endl;
+}
