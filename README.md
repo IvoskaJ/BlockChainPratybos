@@ -36,8 +36,13 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    hashas su konstitucija:
    ![image](https://user-images.githubusercontent.com/78845735/135329097-c9b9a584-702c-41d2-9bb5-dbbc086bba92.png)
    
+   
    papildoma uzd.
+   
+   
    ![image](https://user-images.githubusercontent.com/78845735/135329245-560ff63d-59e8-4755-9027-1e941b9d68f9.png)
+   
+   
    lyginama buvo su dideliu failu pilnu random symboliu, kadangi md5 ir sha256 implementacijos (kurios buvo paimtos is interneto) veike taip greitai, kad dazniausia matuojant kiek laiko uztrunka uzhashinti konstitucija.txt, laikas buvo gaunamas 0
    taigi is tyrimo akivaizdu, kad parasyta hash funkcija yra labai leta, palyginus su md5 ir sha256
 
