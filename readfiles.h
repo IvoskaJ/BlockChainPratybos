@@ -7,6 +7,8 @@
 #include <vector>
 #include <exception>
 #include <chrono>
+#include <algorithm>
+#include <numeric>
 
 using namespace std::chrono;
 
@@ -51,7 +53,7 @@ string  gen_random(int len) {
 
 void fileGenerator(int stringLength){
     ofstream fr(to_string(stringLength) + "symbols.txt");
-        for (int j=0; j<25000; j++){
+        for (int j=0; j<50000; j++){
             fr << gen_random(stringLength) << endl;
         }
     fr.close();
@@ -130,30 +132,33 @@ bool useFiles(){
 void doCollisionAnalysis(){
         generateFiles();
         int symbolLength = 10;
+        int amountOfCollisions = 0;
         for(int i =0; i<3; i++){
         string fileName = (to_string(symbolLength) + "symbols.txt");
-        vector<string> vectorOfStrings;
-        readFileForCollisionAnalysis(fileName, vectorOfStrings);
-        vector<string> vectorOfHashes;
-        int ammountOfCollisions = 0;
-        for(int j = 0; j<vectorOfStrings.size(); j++){
-            vectorOfHashes.push_back(giveOutPut(vectorOfStrings[j]));
+        vector<string> vector1;
+        vector<string> vector2;
+        string temp;
+        ifstream fd(fileName);
+        for(int j = 0; j<25000; j++){
+            fd >> temp;
+            vector1.push_back(temp);
+            fd >> temp;
+            vector2.push_back(temp);
         }
-        ofstream fr(to_string(symbolLength) + "hashedSymbols.txt");
-        for(int j=0; j<vectorOfHashes.size(); j++){
-            fr << vectorOfHashes[j] << endl;
+        for(int j=0; j<vector1.size(); j++){
+            temp = giveOutPut(vector1[i]);
+            vector1.at(j) = temp;
+            temp = giveOutPut(vector2[i]);
+            vector2.at(j) = temp;
         }
-        vectorOfStrings.clear();
-        for(int j = 0; j<vectorOfHashes.size(); j++){
-            for(int z =0; z<vectorOfHashes.size(); z++){
-                if(j==z) {z++;}
-                if(vectorOfHashes[j]==vectorOfHashes[z]){
-                    ammountOfCollisions++;
-                }
+        for(int j=0; j<vector1.size(); j++){
+            if(vector1[j] == vector2[j]){
+                amountOfCollisions++;
             }
+            vector1.clear();
+            vector2.clear();
         }
-        cout << ammountOfCollisions  << " collisions occured in " << fileName << endl;
-        vectorOfHashes.clear();
+        cout << amountOfCollisions  << " collisions occured in " << fileName << endl;
         symbolLength=symbolLength*10;
         }
 
@@ -192,6 +197,16 @@ void compareToShaAndMd5(){
     cout << "time taken to hash 1000symbols.txt with md5 " << duration.count() << endl;
 }
 
+double average(vector<int> const& v){
+    int sum=0;
+    double a;
+    for (int i=0; i<v.size(); i++){
+        sum=sum+v.at(i);
+    }
+    a = (sum / v.size());
+    return a;
+}
+
 void findPercentileOfMatchingHex(){
         ofstream fr("fileForCheckingHashes.txt");
         for (int j=0; j<100000; j++){
@@ -221,19 +236,31 @@ void findPercentileOfMatchingHex(){
         }
         int amountOfMatches=0;
         string temp2;
+        vector<int> totalAmountOfMatches;
         for (int i = 0; i<100000; i++){
+            int amountOfMatchesInOnePair=0;
             temp = hashesThatStartWithA[i];
             temp2 = hashesThatStartWithB[i];
             for(int j =0; j<64; j++){
-                if(temp.at(j)==temp2.at(j))
+                if(temp.at(j)==temp2.at(j)){
                     amountOfMatches++;
+                    amountOfMatchesInOnePair++;
+                }
             }
+            totalAmountOfMatches.push_back(amountOfMatchesInOnePair);
         }
         hashesThatStartWithA.clear();
         hashesThatStartWithB.clear();
 
         double percentageOfMatchingHex = (amountOfMatches * 100 / 6400000);
         cout << "percentile of matching hex: " << percentageOfMatchingHex << "% " << endl;
+        auto it = max_element(totalAmountOfMatches.begin(), totalAmountOfMatches.end());
+        cout << "max amount of matches in single pair: " << *it << endl;
+        it = min_element(totalAmountOfMatches.begin(), totalAmountOfMatches.end());
+        cout << "min amount of matches in single pair: " << *it << endl;
+        double avg = average(totalAmountOfMatches);
+        cout << "average amount of matches in single pair: " << avg << endl;
+        totalAmountOfMatches.clear();
 }
 
 void findPercentileOfMatchingBinary(){
@@ -255,17 +282,29 @@ void findPercentileOfMatchingBinary(){
         }
         int amountOfMatches = 0;
         string temp2;
+        vector<int> totalAmountOfMatches;
         for (int i = 0; i<100000; i++){
+            int amountOfMatchesInOnePair=0;
             temp = hashesThatStartWithA[i];
             temp2 = hashesThatStartWithB[i];
             for(int j =0; j<256; j++){
-                if(temp.at(j)==temp2.at(j))
+                if(temp.at(j)==temp2.at(j)){
                     amountOfMatches++;
+                    amountOfMatchesInOnePair++;
+                }
             }
+            totalAmountOfMatches.push_back(amountOfMatchesInOnePair);
         }
         hashesThatStartWithA.clear();
         hashesThatStartWithB.clear();
 
         double percentageOfMatchingBinary = (amountOfMatches * 100 / 25600000);
         cout << "percentile of matching binary: " << percentageOfMatchingBinary << "% " << endl;
+        auto it = max_element(totalAmountOfMatches.begin(), totalAmountOfMatches.end());
+        cout << "max amount of matches in single pair: " << *it << endl;
+        it = min_element(totalAmountOfMatches.begin(), totalAmountOfMatches.end());
+        cout << "min amount of matches in single pair: " << *it << endl;
+        double avg = average(totalAmountOfMatches);
+        cout << "average amount of matches in single pair: " << avg << endl;
+        totalAmountOfMatches.clear();
 }
