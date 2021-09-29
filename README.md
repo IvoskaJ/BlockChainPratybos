@@ -12,3 +12,5 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    2021/09/27 ketvirtas commitas, (turbut) galutinai sutvarkyta hash funkcija, padarytas teisingas outputas, pridetos funkcijos skirtos tobulinti programos naudojima.
    
    2021/09/27 penktas commitas, ideta galimybe palyginti hash funkcija su sha256, ir md5, collisionu tikrinimas
+   
+   2021/09/29 sestas commitas, ideta galimybe patikrinti gaunamu hashu panasumus bitu ir hex'o lygmenyje.
