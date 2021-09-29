@@ -55,3 +55,14 @@ Repozitorija skirta blockchain tehnologiju pratyboms
    
    ![image](https://user-images.githubusercontent.com/78845735/135331546-070e8b07-9450-479b-b0b1-f066634ca387.png)
 
+
+6.  Susigeneruokite bent 100 000 atsitiktinių simbolių eilučių ( string 'ų) porų, apsiribojant iki 1000 simbolių eilučių ilgiu (kaip ir aukščiau) ir kad jos skirtųsi tik vienu simboliu pvz.: (asdfg, bsdfg). Įvertinkite Jūsų gautų hash'ų procentinį "skirtingumą":
+bitų lygmenyje;
+hex'ų lygmenyje.
+Išveskite minimalią, maksimalią ir vidurkines "skirtingumo" reikšmes. Tokiu būdu įsitikinsite, kaip gerai Jūsų hash funkcija atitinka 7-ą reikalavimą (lavinos efektą).
+   
+   
+   ![image](https://user-images.githubusercontent.com/78845735/135337462-3c2dad0d-aef6-41bb-b8d4-715b4df37f6d.png)
+   
+   pagal sia nuotrauka matome, kad avalanche efektas pasiektas tik minimaliai
+
